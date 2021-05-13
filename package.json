@@ -1,6 +1,6 @@
 {
   "name": "vue-color-picker-simple",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "vue, color-picker, colorPicker",
   "main": "./dist/index.js",
   "scripts": {

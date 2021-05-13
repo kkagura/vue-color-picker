@@ -1,13 +1,14 @@
 {
-  "name": "vue-color-picker",
-  "version": "1.0.0",
+  "name": "vue-color-picker-simple",
+  "version": "1.0.1",
   "description": "vue, color-picker, colorPicker",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack --config webpack.build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "https://github.com/kkagura/vue-color-picker",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -46,5 +47,9 @@
   "license": "ISC",
   "dependencies": {
     "vue": "^2.6.12"
-  }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

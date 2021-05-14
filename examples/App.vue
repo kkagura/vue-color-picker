@@ -1,17 +1,6 @@
 <template>
   <div>
-    <color-picker v-model="color" />
-    <color-picker
-      :style="{
-      marginTop: '600px'
-    }"
-      v-model="color2"
-    />
-    <input
-      type="text"
-      v-model="color"
-      style="margin-top: 600px;"
-    >
+    <color-picker v-model="color" @onOpen="onOpen" @onClose="onClose" />
   </div>
 </template>
 <script>
@@ -19,8 +8,15 @@ export default {
   data() {
     return {
       color: "rgba(210,224,67,.5)",
-      color2: "rgba(210,224,67,.5)",
     };
+  },
+  methods: {
+    onOpen() {
+      console.log("open");
+    },
+    onClose(color) {
+      console.log("close", color);
+    },
   },
 };
 </script>

@@ -22,8 +22,12 @@ export default {
     onClick() {
       if (!this.showPanel) {
         this.measure();
+        this.open();
         this.showPanel = true;
       }
+    },
+    open() {
+      this.$emit("onOpen");
     },
     measure() {
       const { x, y, height } = this.$refs.button.getBoundingClientRect();
@@ -63,6 +67,7 @@ export default {
     },
     close() {
       this.showPanel = false;
+      this.$emit("onClose", this.value);
     },
   },
   watch: {

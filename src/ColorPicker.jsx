@@ -4,6 +4,7 @@ import { contains } from "./utils/utils";
 export default {
   props: {
     value: String,
+    disabled: Boolean,
   },
   data() {
     return {
@@ -33,6 +34,7 @@ export default {
       this.$emit("change", color);
     },
     onClick() {
+      console.log(this.disabled);
       if (!this.showPanel) {
         this.measure();
         this.open();
@@ -82,6 +84,9 @@ export default {
       this.showPanel = false;
       this.$emit("onClose", this.value);
     },
+    renderDisabledMask() {
+      return this.disabled ? <div class="ew-disabled-mask"></div> : null;
+    },
   },
   watch: {
     showPanel() {
@@ -93,8 +98,9 @@ export default {
   },
   render() {
     return (
-      <div onClick={this.onClick} class="ew-cp-trigger" ref="button">
-        <span class="ew-cp-alpha-bg">
+      <div class="ew-cp-trigger" ref="button">
+        {this.renderDisabledMask()}
+        <span onClick={this.onClick} class="ew-cp-alpha-bg">
           <span
             class="ew-cp-color-bg"
             style={{

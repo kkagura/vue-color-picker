@@ -1,15 +1,7 @@
 <template>
-  <div
-    :style="{
-      display: 'flex',
-      justifyContent: 'space-between',
-    }"
-  >
-    <color-picker v-model="color" @onOpen="onOpen" @onClose="onClose" />
+  <div>
     <color-picker
-      :style="{
-        marginRight: r + 'px',
-      }"
+      :disabled="disabled"
       v-model="color"
       @onOpen="onOpen"
       @onClose="onClose"
@@ -21,7 +13,7 @@ export default {
   data() {
     return {
       color: "rgba(210,224,67,.5)",
-      r: 0,
+      disabled: true,
     };
   },
   methods: {
@@ -30,7 +22,6 @@ export default {
     },
     onClose(color) {
       console.log("close", color);
-      this.r += 100;
     },
   },
 };

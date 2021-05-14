@@ -1,5 +1,6 @@
 import "./style/index.less";
 import ColorPickerPanel from "./ColorPickerPanel";
+import { contains } from "./utils/utils";
 export default {
   props: {
     value: String,
@@ -16,6 +17,14 @@ export default {
     event: "change",
   },
   methods: {
+    onClickDocument(e) {
+      if (!this._com) {
+        return;
+      }
+      if (!contains(this._com.$el, e.target) && !contains(this.$el, e.target)) {
+        this.close();
+      }
+    },
     change(color) {
       this.$emit("change", color);
     },
@@ -75,7 +84,9 @@ export default {
       this.togglePanel();
     },
   },
-  updated() {},
+  mounted() {
+    document.addEventListener("click", this.onClickDocument);
+  },
   render() {
     return (
       <div onClick={this.onClick} class="ew-cp-trigger" ref="button">

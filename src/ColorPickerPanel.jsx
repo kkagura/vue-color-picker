@@ -1,4 +1,11 @@
-import { hsvToRgb, rgbToHsv, toInt, rgbToHex, getRgba, hexToRgb } from './utils/utils';
+import {
+  hsvToRgb,
+  rgbToHsv,
+  toInt,
+  rgbToHex,
+  getRgba,
+  hexToRgb,
+} from "./utils/utils";
 
 export default {
   props: {
@@ -20,7 +27,7 @@ export default {
         s: 1,
         v: 1,
       },
-      hex: '',
+      hex: "",
       hsvcPos: {
         x: 0,
         y: 0,
@@ -38,9 +45,9 @@ export default {
       handler() {
         const color =
           this.rgba.a === 1
-            ? '#' + this.hex
+            ? "#" + this.hex
             : `rgba(${this.rgba.r},${this.rgba.g},${this.rgba.b},${this.rgba.a})`;
-        this.$emit('change', color);
+        this.$emit("change", color);
       },
       deep: true,
     },
@@ -61,7 +68,7 @@ export default {
       this.updateAlphaPos();
     },
     close() {
-      this.$emit('close');
+      this.$emit("close");
     },
     measure() {
       if (!this.$refs.panel) {
@@ -79,7 +86,7 @@ export default {
       this.hex = hex;
     },
     updateRgbByHex() {
-      const rgb = hexToRgb('#' + this.hex);
+      const rgb = hexToRgb("#" + this.hex);
       this.rgba = Object.assign(this.rgba, rgb);
     },
     updateRgbByHsv() {
@@ -113,8 +120,13 @@ export default {
     dragHsv(e) {
       e.preventDefault();
       const half = 6;
-      const move = e => {
-        const { top, left, width, height } = this.$refs.hsvp.getBoundingClientRect();
+      const move = (e) => {
+        const {
+          top,
+          left,
+          width,
+          height,
+        } = this.$refs.hsvp.getBoundingClientRect();
         let x = e.pageX - left - half;
         let y = e.pageY - top - half;
         if (x < -half) {
@@ -145,7 +157,7 @@ export default {
       e.preventDefault();
       const { left, width } = this.$refs.hp.getBoundingClientRect();
       const half = 2;
-      const move = e => {
+      const move = (e) => {
         let x = e.pageX - left - half;
         if (x < -half) {
           x = -half;
@@ -166,7 +178,7 @@ export default {
       e.preventDefault();
       const { left, width } = this.$refs.alpha.getBoundingClientRect();
       const half = 2;
-      const move = e => {
+      const move = (e) => {
         let x = e.pageX - left - half;
         if (x < -half) {
           x = -half;
@@ -182,13 +194,13 @@ export default {
     },
     bindDragger(move) {
       const up = () => {
-        window.removeEventListener('mousemove', move);
-        window.removeEventListener('mouseup', up);
-        window.removeEventListener('mouseleave', up);
+        window.removeEventListener("mousemove", move);
+        window.removeEventListener("mouseup", up);
+        window.removeEventListener("mouseleave", up);
       };
-      window.addEventListener('mousemove', move);
-      window.addEventListener('mouseup', up);
-      window.addEventListener('mouseleave', up);
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+      window.addEventListener("mouseleave", up);
     },
     onRgbaChange(value, tag) {
       value = toInt(value);
@@ -200,7 +212,7 @@ export default {
       this.updateAlphaPos();
     },
     onHexChange(e) {
-      const hex = '#' + e.target.value;
+      const hex = "#" + e.target.value;
       const rgb = getRgba(hex);
       this.rgba = Object.assign(this.rgba, rgb);
     },
@@ -220,8 +232,8 @@ export default {
           <span
             class="ew-hsvc"
             style={{
-              left: x + 'px',
-              top: y + 'px',
+              left: x + "px",
+              top: y + "px",
             }}
           ></span>
         </div>
@@ -232,7 +244,7 @@ export default {
         <div class="ew-hp" ref="hp" onMousedown={this.dragHp}>
           <span
             style={{
-              left: this.hcPos.x + 'px',
+              left: this.hcPos.x + "px",
             }}
             class="ew-hpc"
           ></span>
@@ -245,7 +257,7 @@ export default {
           <div class="ew-alpha-bg">
             <span
               style={{
-                left: this.alphaPos.x + 'px',
+                left: this.alphaPos.x + "px",
               }}
               class="ew-alphac"
             ></span>
@@ -260,7 +272,7 @@ export default {
             R:
             <input
               value={this.rgba.r}
-              onInput={e => this.onRgbaChange(e.target.value, 'r')}
+              onInput={(e) => this.onRgbaChange(e.target.value, "r")}
               class="ew-cip-i-r ew-cip-i"
             />
           </div>
@@ -268,7 +280,7 @@ export default {
             G:
             <input
               value={this.rgba.g}
-              onInput={e => this.onRgbaChange(e.target.value, 'g')}
+              onInput={(e) => this.onRgbaChange(e.target.value, "g")}
               class="ew-cip-i-g ew-cip-i"
             />
           </div>
@@ -276,7 +288,7 @@ export default {
             B:
             <input
               value={this.rgba.b}
-              onInput={e => this.onRgbaChange(e.target.value, 'b')}
+              onInput={(e) => this.onRgbaChange(e.target.value, "b")}
               class="ew-cip-i-b ew-cip-i"
             />
           </div>
@@ -284,7 +296,7 @@ export default {
             A:
             <input
               value={parseFloat(this.rgba.a.toFixed(2))}
-              onInput={e => this.onRgbaChange(e.target.value, 'a')}
+              onInput={(e) => this.onRgbaChange(e.target.value, "a")}
               class="ew-cip-i-a ew-cip-i"
             />
           </div>
@@ -298,7 +310,11 @@ export default {
         <div class="ew-cip-row2 ew-cip-row">
           <div class="ew-cip-row-sub">
             HEX:#
-            <input value={this.hex} onInput={this.onHexChange} class="ew-cip-hex-input" />
+            <input
+              value={this.hex}
+              onInput={this.onHexChange}
+              class="ew-cip-hex-input"
+            />
           </div>
           <div class="ew-cip-row-sub ew-cip-pre">
             <div
@@ -328,8 +344,8 @@ export default {
         v-show={this.visible}
         ref="panel"
         style={{
-          left: x + 'px',
-          top: y + 'px',
+          left: x + "px",
+          top: y + "px",
         }}
         class="ew-cp-panel"
       >

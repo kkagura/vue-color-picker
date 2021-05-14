@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div
+    :style="{
+      display: 'flex',
+      justifyContent: 'space-between',
+    }"
+  >
+    <color-picker v-model="color" @onOpen="onOpen" @onClose="onClose" />
     <color-picker v-model="color" @onOpen="onOpen" @onClose="onClose" />
   </div>
 </template>

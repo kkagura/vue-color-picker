@@ -1,15 +1,15 @@
 export function rgbToHex(r, g, b) {
   r = r.toString(16);
   if (r.length == 1) {
-    r = '0' + r;
+    r = "0" + r;
   }
   g = g.toString(16);
   if (g.length == 1) {
-    g = '0' + g;
+    g = "0" + g;
   }
   b = b.toString(16);
   if (b.length == 1) {
-    b = '0' + b;
+    b = "0" + b;
   }
   return (r + g + b).toUpperCase();
 }
@@ -18,12 +18,12 @@ let canvas, ctx;
 export function getRgba(color) {
   if (!canvas || !ctx) {
     // canvas = createElement('<canvas width=1 height=1></canvas>');
-    canvas = document.createElement('canvas');
+    canvas = document.createElement("canvas");
     canvas.width = 1;
     canvas.height = 1;
-    canvas.style.width = '1px';
-    canvas.style.height = '1px';
-    ctx = canvas.getContext('2d');
+    canvas.style.width = "1px";
+    canvas.style.height = "1px";
+    ctx = canvas.getContext("2d");
   }
   ctx.clearRect(0, 0, 1, 1);
   ctx.beginPath();
@@ -162,4 +162,16 @@ export function hsvToRgb() {
     g,
     b,
   };
+}
+
+export function contains(root, n) {
+  let node = n;
+  while (node) {
+    if (node === root) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+
+  return false;
 }

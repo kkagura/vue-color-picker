@@ -21,7 +21,11 @@ export default {
       if (!this._com) {
         return;
       }
-      if (!contains(this._com.$el, e.target) && !contains(this.$el, e.target)) {
+      if (
+        !contains(this._com.$el, e.target) &&
+        !contains(this.$el, e.target) &&
+        this.showPanel
+      ) {
         this.close();
       }
     },

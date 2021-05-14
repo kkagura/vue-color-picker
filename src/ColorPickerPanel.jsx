@@ -38,6 +38,14 @@ export default {
       alphaPos: {
         x: 0,
       },
+      panelRect: {
+        width: 0,
+        height: 0,
+      },
+      panelPos: {
+        x: 0,
+        y: 0,
+      },
     };
   },
   watch: {
@@ -51,12 +59,22 @@ export default {
       },
       deep: true,
     },
+    visible() {
+      if (this.visible) {
+        this.measure();
+      }
+    },
   },
   //  hsv => rgb => hex
   //  rgb => hsv; rgb => hex
   //  hex => rgb => hsv
   mounted() {
     this.init();
+    this.$nextTick(() => {
+      const { width, height } = this.$refs.panel.getBoundingClientRect();
+      this.panelRect = { width, height };
+      this.measure();
+    });
   },
   methods: {
     init() {
@@ -71,14 +89,14 @@ export default {
       this.$emit("close");
     },
     measure() {
-      if (!this.$refs.panel) {
-        return [this.posX, this.posY];
-      }
       let { innerWidth: maxX, innerHeight: maxY } = window;
-      const { width, height } = this.$refs.panel.getBoundingClientRect();
+      const { width, height } = this.panelRect;
       maxY -= height;
       maxX -= width;
-      return [Math.min(this.posX, maxX), Math.min(this.posY, maxY)];
+      [this.panelPos.x, this.panelPos.y] = [
+        Math.min(this.posX, maxX),
+        Math.min(this.posY, maxY),
+      ];
     },
     updateHex() {
       const { r, g, b } = this.rgba;
@@ -338,7 +356,7 @@ export default {
     },
   },
   render() {
-    const [x, y] = this.measure();
+    const { x, y } = this.panelPos;
     return (
       <div
         v-show={this.visible}
